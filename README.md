@@ -1,3 +1,3 @@
-                                        High School of ITIS
+  High School of ITIS
 
-                            Homeworks and other tasks in this repository
+Homeworks and other tasks in this repository
