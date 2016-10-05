@@ -4,7 +4,6 @@ public class Task1 {
 
 	public static void main(String[] args) {
 		double[] arr = new double[10];
-		boolean swapped = false;
 		double k = 0; //variable for swapping a[j] and a[j - 1] values
 
 		for (int i = 0; i < arr.length; i ++) {
