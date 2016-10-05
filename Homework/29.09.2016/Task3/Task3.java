@@ -27,6 +27,6 @@ public class Task3 {
 				System.out.println("b[" + i + "]: "+"No entrances");
 			}
 		}
-    }
+	}
 
 }
