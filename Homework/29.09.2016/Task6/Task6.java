@@ -11,6 +11,7 @@ public class Task6 {
 			}
 			else {
 				isPalindrome = false;
+				break;
 			}
 		}
 
