@@ -18,7 +18,6 @@ public class Main {
 
         System.out.println(decimal + " in binary representation: " + toBinary(decimal));
         System.out.print("Ones in binary representation of number " + decimal + ": " + onesCounter(decimal));
-
     }
 
     public static String toBinary(int decimal) {
