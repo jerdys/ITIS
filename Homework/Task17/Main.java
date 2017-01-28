@@ -8,8 +8,24 @@ public class Main {
 
         System.out.print("Enter the number in decimal representation: ");
         int decimal = sc.nextInt();
+
+        if (decimal < 0) {
+            while (decimal < 0) {
+                System.out.print("Please enter the positive number: ");
+                decimal = sc.nextInt();
+            }
+        }
+
         System.out.print("Enter the base of number system: ");
         int radix = sc.nextInt();
+
+        if (radix > 10 || radix < 1) {
+            while (radix > 10 || radix < 1) {
+                System.out.println("Please enter the number from 1 to 10");
+                radix = sc.nextInt();
+            }
+
+        }
         System.out.println();
 
         int result = Integer.parseInt(toRadix(decimal, radix));
