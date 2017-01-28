@@ -19,9 +19,9 @@ public class Main {
         System.out.print("Enter the base of number system: ");
         int radix = sc.nextInt();
 
-        if (radix > 10 || radix < 1) {
-            while (radix > 10 || radix < 1) {
-                System.out.println("Please enter the number from 1 to 10");
+        if (radix > 10 || radix < 2) {
+            while (radix > 10 || radix < 2) {
+                System.out.println("Please enter the number from 2 to 10");
                 radix = sc.nextInt();
             }
 
