@@ -1,4 +1,4 @@
-package Homework.Task21;
+//http://study.istamendil.info/tasks/21
 
 import java.util.Scanner;
 
