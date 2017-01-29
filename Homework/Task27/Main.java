@@ -1,4 +1,4 @@
-package Homework.Task27;
+//http://study.istamendil.info/tasks/27
 
 public class Main {
     public static void main(String[] args) {
