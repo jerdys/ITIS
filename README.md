@@ -1,4 +1,4 @@
 # Higher School of ITIS
 
 
-Homeworks and other tasks in this repository
+Homeworks, class work tasks and control tests
