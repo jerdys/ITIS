@@ -1,0 +1,23 @@
+1) User's home directory, System.getProperty.userHome()
+
+2) Commands and parameters:
+    ls (example: saves.txt)
+        - extra parameter -l gives extra info (byte 1025 (in bytes), rwx ((read-write-execute) save in boolean variables)
+        * human readable (not 1025 bytes, but in Kbytes (10 Kb), file owner
+        * -a print everything (hidden files)
+
+    cd (relative and absolute path)
+        * cd ~ (home directory)
+
+    rm (deletes file, specify the path after rm command, (example: rm C:\Xuynya))
+        * -r (recursive deletion)
+        * -f (
+
+    mv (1.txt 2.txt -- renames 1.txt into 2.txt; 1.txt a -- moves 1.txt in a directory)
+
+    cp (1.txt a -- copies 1.txt into a)
+
+3*) Autocompletion
+
+
+USE DESIGN PATTERN Command
