@@ -11,7 +11,7 @@
 
     rm (deletes file, specify the path after rm command, (example: rm C:\Xuynya))
         * -r (recursive deletion)
-        * -f (
+        * -f
 
     mv (1.txt 2.txt -- renames 1.txt into 2.txt; 1.txt a -- moves 1.txt in a directory)
 
