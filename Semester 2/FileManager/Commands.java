@@ -307,26 +307,6 @@ public class Commands {
     public String getParameter(String line) {
         String parameter = line.replace(getCommand(line) + " ", "");
         return parameter;
-
-        /*String[] parameter = line.split(" ", 2);
-        String str = "";
-
-        if (parameter.length == 1) {
-            return "";
-        }
-        else if (parameter.length == 2) { //  && parameter[1].toCharArray()[0] != '-'
-            return parameter[1];
-        }
-        else if (parameter.length > 2) {
-            for (int i = 1; i < parameter.length; i++) {
-                str += parameter[i];
-            }
-
-            return str;
-        }
-        else {
-            return "";
-        }*/
     }
 
     public String getCommand(String line) {
@@ -341,23 +321,6 @@ public class Commands {
         else {
             return array[0];
         }
-
-        /*String[] command = line.split(" ", 2);
-
-        if (command.length == 1) {
-            return "";
-        }
-        if (command.length == 2) {
-            if (command[1].toCharArray()[0] == '-') {
-                return command[0] + " " + command[1];
-            }
-            else {
-                return command[0];
-            }
-        }
-        else {
-            return command[0];
-        }*/
     }
 
     public void setCurrentDirectory(String currentDirectory) {
