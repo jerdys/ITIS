@@ -1,60 +1,70 @@
-package FileManager;
+package NewFileManager;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CommandsManager {
-    Commands commandList = new Commands();
+    Commands commands = new Commands();
+    String line, command;
+    File item;
     Scanner sc = new Scanner(System.in);
-    String command;
-    File path = null;
+    boolean clause1 = true, clause2 = true;
 
-    public void start() {
+    public void start() throws IOException, FileManagerException {
         while (true) {
-            command = sc.nextLine();
+            line = sc.nextLine();
+            item = new File(commands.getParameter(line));
+            command = commands.getCommand(line);
 
-            switch (getCommand(command)) {
+            switch(command) {
                 case "cd":
-                    path = new File(getParameter(command));
-                    commandList.cd(path);
-
+                    commands.cd(item.toString());
                     break;
 
-                case "ls":
-                    commandList.ls(commandList.getCurrentDirectory());
+                case "ls":  //DONE
+                    commands.ls(item.toString(), !clause1, !clause2);
+                    break;
 
+                case "ls -l":
+                    commands.ls(item.toString(), clause1, !clause2);
+                    break;
+
+                case "ls -a":   //DONE
+                    commands.ls(item.toString(), !clause1, clause2);
+                    break;
+
+                case "ls -la":
+                    commands.ls(item.toString(), clause1, clause2);
                     break;
 
                 case "rm":
+                    commands.rm(item.toString());
                     break;
+
+                case "rm -r":
+                    commands.rm(item.toString(), clause1);
+                    break;
+
+                case "rm -f":
+                    commands.rm(item.toString(), !clause1);
+                    break;
+
                 case "mv":
+                    commands.mv(item.toString());
                     break;
+
                 case "cp":
+                    commands.cp(item.toString());
                     break;
+
                 case "":
-                    break;
-                default:
-                    System.out.println(getCommand(command) + " is not a command");
+
             }
 
-            commandList.printCurrentDirectory();
+            if (commands.getCurrentDirectory() != "") {
+                System.out.println(">" + commands.getCurrentDirectory());
+            }
         }
-    }
-
-    public String getParameter(String line) {
-        String[] parameter = line.split(" ", 2);
-
-        if (parameter.length == 2) {
-            return parameter[1];
-        }
-        else {
-            return "";
-        }
-    }
-
-    public String getCommand(String line) {
-        String[] command = line.split(" ");
-
-        return command[0];
     }
 }

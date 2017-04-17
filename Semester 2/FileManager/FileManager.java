@@ -1,15 +1,10 @@
-package FileManager;
+package NewFileManager;
 
-import java.io.File;
+import java.io.IOException;
 
 public class FileManager {
-    public static void main(String[] args) {
-        //CommandsManager commandsManager = new CommandsManager();
-        //commandsManager.start();
-
-        //Commands cm = new Commands();
-        //System.out.println(cm.getHomeDirectory());
-
-        System.out.println("\\");
+    public static void main(String[] args) throws IOException, FileManagerException {
+        CommandsManager cm = new CommandsManager();
+        cm.start();
     }
 }
