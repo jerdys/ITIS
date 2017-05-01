@@ -1,8 +1,7 @@
-package NewFileManager;
+package FileManager;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.text.DecimalFormat;
@@ -11,8 +10,8 @@ public class Commands {
     private final String HOME_DIRECTORY = System.getProperty("user.home");
     private String currentDirectory = "";
     boolean r = false, w = false, x = false;
-    String readable, writable, executable;
-    double size;
+    private String readable, writable, executable;
+    private double size;
 
     public void cd(String path) throws IOException {
         File absolutePath = new File(path);
@@ -186,7 +185,7 @@ public class Commands {
             recursiveDeletion(file);
         }
         else {
-            //TODO rm -f (forced deletion)
+            //TODO implement rm -f (forced deletion)
         }
     }
 
@@ -203,7 +202,8 @@ public class Commands {
         }
 
         try {
-            if (file.isFile() && moveTo.isDirectory()) {
+            if (moveTo.isDirectory()) {
+                System.out.println(file + "\nwas copied to\n" + moveTo);
                 file.renameTo(new File(moveTo.toString() + "/" + file.getName()));
             }
             else {
@@ -213,8 +213,6 @@ public class Commands {
         catch (IllegalArgumentException e) {
             throw new FileManagerException("File not found");
         }
-        //another catch throwing IOException
-
     }
 
     public void cp(String line) throws FileManagerException, IOException {
@@ -229,9 +227,18 @@ public class Commands {
             copyTo = new File(getCurrentDirectory() + "/" + copyTo);
         }
 
-        if (file.isFile() && copyTo.isDirectory()) {
-            Files.copy(file.toPath(), copyTo.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        try {
+            if (file.isFile() && copyTo.isDirectory()) {
+                Files.copy(file.toPath(), copyTo.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+            else {
+                throw new IllegalArgumentException();
+            }
         }
+        catch (IllegalArgumentException e) {
+            throw new FileManagerException("File not found");
+        }
+
     }
 
     public void recursiveDeletion(File folder) {
@@ -276,7 +283,6 @@ public class Commands {
 
         String roundedSize = decimalFormat.format(size);
         divideCounter -= 1;
-        //System.out.println(divideCounter);
 
         switch (divideCounter) {
             case -1:
@@ -307,13 +313,14 @@ public class Commands {
     public String getParameter(String line) {
         String parameter = line.replace(getCommand(line) + " ", "");
         return parameter;
+
     }
 
     public String getCommand(String line) {
         String[] array = line.split(" ");
 
-        if (array.length <= 1) {
-            return "";
+        if (array.length == 1) {
+            return array[0];
         }
         else if (array[1].toCharArray()[0] == '-') {
             return array[0] + " " + array[1];

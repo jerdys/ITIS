@@ -1,4 +1,4 @@
-package NewFileManager;
+package FileManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class CommandsManager {
                     commands.cd(item.toString());
                     break;
 
-                case "ls":  //DONE
+                case "ls":
                     commands.ls(item.toString(), !clause1, !clause2);
                     break;
 
@@ -59,6 +59,9 @@ public class CommandsManager {
                     break;
 
                 case "":
+
+                default:
+                    System.out.println("Invalid command");
 
             }
 

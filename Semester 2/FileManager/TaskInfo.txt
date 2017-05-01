@@ -9,7 +9,7 @@
     cd (relative and absolute path)
         * cd ~ (home directory)
 
-    rm (deletes file, specify the path after rm command, (example: rm C:\Xuynya))
+    rm (deletes file, specify the path after rm command, (example: rm C:\Test))
         * -r (recursive deletion)
         * -f
 

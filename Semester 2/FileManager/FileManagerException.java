@@ -1,5 +1,8 @@
-package NewFileManager;
+package FileManager;
 
+/**
+ * Created by jerdys on 17.04.17.
+ */
 public class FileManagerException extends Exception {
     public FileManagerException() {}
 
