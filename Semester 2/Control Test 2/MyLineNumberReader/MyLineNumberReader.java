@@ -1,116 +1,80 @@
-package MyLineNumberReader;
-
-import java.io.*;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
 
 /**
- * Created by jerdys on 10.05.17.
+ * Created by jerdys on 11.05.2017.
  */
 
-public class MyLineNumberReader {
-    private FileReader fr;
-    private int lineNumber = 0;
-    private String filePath;
-    private BufferedReader bufferedReader;
-    private int skipCounter;
+public class MyLineNumberReader extends BufferedReader{
+    private int currentLineNumber;
 
-    public MyLineNumberReader(FileReader fr, String path) {
-        this.fr = fr;
-        this.filePath = path;
-        File file = new File(path);
-
-        if (file.isFile() && file.exists()) {
-            try (InputStreamReader read = new InputStreamReader(new FileInputStream(file))) {
-                this.bufferedReader = new BufferedReader(read);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public MyLineNumberReader(Reader reader) {
+        super(reader);
+        currentLineNumber = 0;
     }
 
-    public int read() {
-        try {
-            int lineTxt;
-
-            while ((lineTxt = this.bufferedReader.read()) != 0) {
-                return lineTxt;
-            }
-        } catch (Exception e) {
-            System.out.println("Error reading content from file");
-            e.printStackTrace();
-        }
-
-        return -1;
+    public MyLineNumberReader(Reader reader, int size) {
+        super(reader, size);
     }
 
-    public String readLine() {
-        int num = 0;
-        ArrayList characters = new ArrayList();
-        //List<Character> line = new ArrayList<>();
-        char line = 0;
-        String finishedLine = "";
-        int tmp;
+    public String readLine() throws IOException {
+        String newString = super.readLine();
 
-        try {
-            while ((num = fr.read()) != -1) {
-                if (num == '\n') {
-                    lineNumber++;
-
-                    for (int i = 0; i < characters.size(); i++) {
-                        //System.out.println(characters.get(i));
-                        tmp = Integer.parseInt(characters.get(i).toString());
-                        line = (char) tmp;
-                        finishedLine += line;
-                    }
-
-                    return finishedLine;
-                }
-                else {
-                    characters.add(num);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-
-            return null;
+        if (newString != null) {
+            currentLineNumber++;
         }
 
-        if (characters.size() > 0) {
-            lineNumber++;
-
-            Character.toString(line);
-        }
-
-        return null;
+        return newString;
     }
 
-    public void close() {
-        try {
-            fr.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public int read() throws IOException {
+        int c = super.read();
+
+        while (c == '\r') {
+            currentLineNumber++;
+            c = super.read();
         }
+
+        if (c == '\n') {
+            currentLineNumber++;
+        }
+
+        return c;
     }
 
-    public void skip(long n) {
-        if (n > 0) {
-            //UNIMPLEMENTED
+    public int read(char[] cbuf, int off, int len) throws IOException {
+        int i;
+        int c;
+
+        for (i = 0; i < len - off && (c = read()) != -1; i++) {
+            cbuf[i] = (char) c;
+        }
+
+        return i + 1;
+    }
+
+    public long skip(long n) throws IOException {
+        long i;
+
+        if (n < 0) {
+            throw  new IllegalArgumentException();
         }
         else {
-            throw new IllegalArgumentException("Value must be positive");
+            for (i = 0; i < n && read() != -1; i++) {
+                read();
+                i++;
+            }
+
+            return i;
         }
     }
 
-    //SETTERS & GETTERS
-    public void setLineNumber(int lineNumber) {
-        this.lineNumber=lineNumber;
+    public void setLineNumber(int n) {
+        currentLineNumber = n;
     }
 
-    public int getLineNumber() {
-        return lineNumber;
+    public int getLineNumber(){
+        return currentLineNumber;
     }
 }
